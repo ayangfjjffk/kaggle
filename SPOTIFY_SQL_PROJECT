@@ -1,0 +1,81 @@
+----------------------To get to know about data ----------------------------
+SELECT *  
+FROM `ferrous-pattern-327905.Spotify.Spotify_songs`;
+
+
+--------------- To find sum of Unique Songs ---------------------
+
+SELECT COUNT(DISTINCT(track_name)) as `Distinct Track Name`
+FROM `ferrous-pattern-327905.Spotify.Spotify_songs`;
+
+--------------- Calculate the total durations of all songs ----------------
+
+SELECT SUM(duration_ms) AS `Total Duration of Songs`
+FROM `ferrous-pattern-327905.Spotify.Spotify_songs`;
+
+
+
+--------------- To find Average Popularity-----------
+SELECT AVG(track_popularity) AS average_popularity
+FROM `ferrous-pattern-327905.Spotify.Spotify_songs`;
+
+
+
+-------- Earliest and latest album release date -------------
+
+SELECT MIN(track_album_release_date) AS earliest_release_date,
+MAX(track_album_release_date) AS latest_release_date
+FROM `ferrous-pattern-327905.Spotify.Spotify_songs`;
+
+----------No of songs in each Playlist genre--------------
+
+SELECT playlist_genre, COUNT(DISTINCT track_id) AS song_count
+FROM `ferrous-pattern-327905.Spotify.Spotify_songs`
+GROUP BY playlist_genre
+HAVING song_count > 500;
+
+--------------Merge Track name and Track artist-------------------
+
+SELECT CONCAT(track_name, ' by ', track_artist) AS song_info
+FROM `ferrous-pattern-327905.Spotify.Spotify_songs`;
+
+
+
+------------Finding songs having Love-------------
+SELECT 
+  track_name,
+  track_artist,
+  track_popularity,
+  SUBSTRING(track_album_release_date, 1, 4) AS release_year,
+  CONCAT('Genre: ', playlist_genre) AS genre_tag
+FROM `ferrous-pattern-327905.Spotify.Spotify_songs`
+WHERE track_name LIKE '%love%'
+  AND track_album_release_date IS NOT NULL
+  AND track_popularity > 70
+ORDER BY track_popularity DESC;
+
+
+-----------------Sorting harmonies into 'High' or 'Low'--------------
+
+SELECT track_name,
+    CASE
+      WHEN track_popularity > 75 THEN 'High'
+      ELSE 'Low'
+    END AS popularity_category
+FROM `ferrous-pattern-327905.Spotify.Spotify_songs`;
+
+
+-----------------Songs more than average acoustic--------------
+
+SELECT COUNT(DISTINCT(track_name)) as No_of_tracks
+FROM `ferrous-pattern-327905.Spotify.Spotify_songs`
+WHERE acousticness > (SELECT AVG(acousticness)
+      FROM `ferrous-pattern-327905.Spotify.Spotify_songs`);
+
+
+
+
+
+
+
+
