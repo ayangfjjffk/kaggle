@@ -73,6 +73,17 @@ WHERE acousticness > (SELECT AVG(acousticness)
       FROM `ferrous-pattern-327905.Spotify.Spotify_songs`);
 
 
+---------------------------------------XXX------------------------------------
+
+Link for PPT:
+https://www.canva.com/design/DAFawpA9-MI/FNVmfjMnFyjaERG66EPzHw/edit?utm_content=DAFawpA9-MI&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
+
+
+Link for Dataset: https://www.kaggle.com/datasets/joebeachcapital/30000-spotify-songs
+
+
+
+
 
 
 
